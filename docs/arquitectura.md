@@ -1,40 +1,71 @@
 # Arquitectura del Sistema - Proyecto Escuadra
 
 ## 1. Visión General
-El proyecto **Escuadra** está diseñado como una suite modular de herramientas de cálculo para ingeniería civil y mecánica. La arquitectura sigue el principio de **Separación de Responsabilidades**, dividiendo claramente la lógica matemática de la interfaz de usuario para garantizar precisión, mantenibilidad y escalabilidad.
+El proyecto **Escuadra** está diseñado como una plataforma modular de herramientas orientadas a distintas ramas de la ingeniería. La arquitectura sigue un principio de **Separación de Responsabilidades**, permitiendo que cada área de ingeniería implemente sus propias soluciones de forma independiente.
+
+El sistema prioriza la escalabilidad, permitiendo agregar nuevas herramientas sin afectar el funcionamiento general.
+
+---
 
 ## 2. Componentes Principales
-- **Capa de Aplicación (Core)**: Contiene los algoritmos de cálculo, fórmulas físicas y la lógica de negocio. Es independiente de la interfaz.
-- **Capa de Presentación (UI)**: Gestiona la interacción con el usuario, captura de datos y visualización de resultados gráficos.
-- **Capa de Soporte (Utils)**: Incluye conversores de unidades técnicas, formateadores de precisión numérica y manejo de errores.
+- **Capa de Aplicación (Core)**: Contiene la lógica de cada herramienta de ingeniería, incluyendo algoritmos, cálculos y procesamiento de datos.
+- **Capa de API (Flask)**: Expone las funcionalidades mediante endpoints REST para permitir el acceso a las herramientas desde clientes externos.
+- **Capa de Soporte (Utils)**: Incluye utilidades comunes como validación de datos, manejo de errores y formateo de resultados.
 
-## 3. Diagrama de Arquitectura
-El sistema utiliza una arquitectura de capas simple:
-`[ Usuario ] <--> [ Capa de Interfaz (UI) ] <--> [ Capa de Lógica (Core) ]`
+---
+
+## 3. Organización por Ramas de Ingeniería
+El sistema está estructurado en módulos independientes según cada área:
+escuadra/
+	├── src/
+	│ 	├── mecanica/
+	│ 	├── sistemas/
+	│ 	├── industrial/
+	│ 	├── civil/
+	│ 	├── electrica/
+	├── docs/	
+
+Cada módulo contiene herramientas específicas de su rama de ingeniería, permitiendo desarrollo paralelo sin conflictos.
+
+---
 
 ## 4. Tecnologías Utilizadas
 
 | Componente | Tecnología | Versión | Justificación |
 |---|---|---|---|
-| **Lenguaje Base** | Python | 3.10+ | Facilidad para el desarrollo de algoritmos de ingeniería. |
-| **Interfaz Gráfica** | Tkinter / PySide | Actual | Estándar robusto para aplicaciones de escritorio. |
-| **Cálculo Numérico** | NumPy | Actual | Alta precisión en operaciones vectoriales y matriciales. |
-| **Documentación** | Markdown | N/A | Estándar de la industria para documentación técnica en Git. |
+| **Lenguaje Base** | Python | 3.10+ | Facilidad para implementar lógica y cálculos |
+| **Framework API** | Flask | Actual | Permite exponer funcionalidades como servicios REST |
+| **Gestión de dependencias** | pip | N/A | Manejo sencillo mediante requirements.txt |
+| **Documentación** | Markdown | N/A | Estándar para documentación en repositorios Git |
+
+---
 
 ## 5. Decisiones de Diseño
 
-### Decisión 1: Estructura Basada en Módulos
-**Contexto:** El sistema crecerá con múltiples herramientas (vigas, conversor, estadística).
-**Decisión:** Cada herramienta vivirá en su propio submódulo dentro de `src/core`.
-**Consecuencias:** Permite que varios desarrolladores trabajen en herramientas distintas sin causar conflictos de código.
+### Decisión 1: Arquitectura Modular por Ingeniería
+**Contexto:** El proyecto involucra múltiples áreas de ingeniería con distintas necesidades.  
+**Decisión:** Separar cada rama en módulos independientes dentro de `src/`.  
+**Consecuencias:** Permite que diferentes equipos trabajen en paralelo sin interferencias.
 
-### Decisión 2: Precisión de Punto Flotante
-**Contexto:** Un error de decimales en ingeniería puede ser crítico.
-**Decisión:** Se implementa un estándar de precisión de $10^{-6}$ en todos los resultados.
-**Consecuencias:** Seguridad técnica en los reportes generados por la suite.
+---
+
+### Decisión 2: Uso de API REST con Flask
+**Contexto:** Se requiere que las herramientas puedan ser consumidas externamente.  
+**Decisión:** Implementar una capa de API utilizando Flask.  
+**Consecuencias:** Facilita la integración con otras aplicaciones y servicios.
+
+---
+
+### Decisión 3: Consistencia Tecnológica
+**Contexto:** Es necesario mantener coherencia entre módulos.  
+**Decisión:** Usar Python como lenguaje base y pip para dependencias.  
+**Consecuencias:** Simplifica la instalación y mantenimiento del proyecto.
+
+---
 
 ## 6. Flujo de Datos
-1. El usuario ingresa parámetros técnicos en la **UI**.
-2. La UI envía los datos a la función correspondiente en el **Core**.
-3. El Core procesa el cálculo y aplica las constantes de ingeniería.
-4. El resultado se devuelve a la UI para ser mostrado con el formato técnico adecuado.
+1. El usuario o cliente realiza una solicitud a la API.
+2. La API (Flask) recibe los parámetros y los valida.
+3. La solicitud se envía al módulo correspondiente en el Core.
+4. El Core procesa la información y genera un resultado.
+5. La API devuelve la respuesta al cliente en formato estructurado (JSON).
