@@ -1,23 +1,28 @@
-# Requerimientos del Proyecto
-
-## Requerimientos Funcionales
+# Requerimientos Funcionales (RF)
 
 | ID | Descripción | Prioridad | Estado |
-|---|---|---|---|
-| RF-001 | | Alta | Pendiente |
+|----|-------------|-----------|--------|
+| RF-001 | Calcular área de un círculo | Alta | Pendiente |
+| RF-002 | Calcular área de un rectángulo | Alta | Pendiente |
+| RF-003 | Convertir Celsius a Fahrenheit | Alta | Pendiente |
+| RF-004 | Convertir Celsius a Kelvin | Media | Pendiente |
+| RF-005 | Calcular resistencia eléctrica (Ley de Ohm) | Alta | Pendiente |
+| RF-006 | Calcular potencia eléctrica | Media | Pendiente |
+| RF-007 | Calcular perímetro de un círculo | Baja | Pendiente |
+| RF-008 | Calcular volumen de un cilindro | Baja | Pendiente |
 
-## Requerimientos No Funcionales
-
-| ID | Descripción | Categoría | Estado |
-|---|---|---|---|
-| RNF-001 | El sistema debe ser compatible con Windows 10, Linux (Ubuntu 20.04+) y macOS 11+. | Compatibilidad | Pendiente |
-| RNF-002 | El sistema debe ejecutarse en Python 3.10 o superior. | Software | Pendiente |
-| RNF-003 | El sistema puede utilizar dependencias externas mediante pip, definidas en requirements.txt. | Software | Pendiente |
-| RNF-004 | El tiempo de respuesta del sistema no debe superar los 2 segundos en condiciones normales. | Rendimiento | Pendiente |
-| RNF-005 | La interfaz debe ser intuitiva y fácil de usar para nuevos usuarios. | Usabilidad | Pendiente |
-
-## Requerimientos de Sistema
+# Requerimientos No Funcionales (RNF)
 
 | ID | Descripción |
-|---|---|
-| RS-001 | |
+|----|-------------|
+| RNF-001 | Ejecución desde CLI |
+| RNF-002 | Compatible con Python 3.8+ |
+| RNF-003 | Respuesta menor a 1 segundo |
+
+# Requerimientos de Software (RS)
+
+| Componente | Versión |
+|------------|---------|
+| Python | 3.8+ |
+| Node.js | No aplica |
+| SO | Windows, Linux, macOS |
