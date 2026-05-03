@@ -1,23 +1,28 @@
 [build-system]
 requires = ["setuptools>=61.0"]
-feat/cli-argparse-base
-build-backend = "setuptools.backends.legacy:build"
-
 build-backend = "setuptools.build_meta"
-dev
 
 [project]
 name = "escuadra"
 version = "0.1.0"
-feat/cli-argparse-base
 description = "Herramientas de cálculo de ingeniería civil y eléctrica"
 requires-python = ">=3.10"
+
+[project.optional-dependencies]
+dev = ["ruff", "taskipy"]
 
 [project.scripts]
 escuadra = "escuadra.cli:main"
 
-requires-python = ">=3.10"
-
 [tool.setuptools.packages.find]
 where = ["src"]
-dev
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W"]
+
+[tool.taskipy.tasks]
+lint = "ruff check ."
