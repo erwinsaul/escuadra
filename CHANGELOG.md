@@ -7,13 +7,18 @@ y este proyecto sigue el versionado [SemVer](https://semver.org/lang/es/).
 
 ## [Unreleased]
 
-### Added
+### Agregado
 - Estructura inicial del proyecto
 - Organización de carpetas bajo la arquitectura definida
-- Documentación inicial (README, guías de estilo, glosario, etc.)
+- Documentación inicial del proyecto
+- Archivo README con descripción general del sistema
+- Guías de estilo para el desarrollo
+- Glosario de términos del proyecto
+- Configuración inicial del entorno de desarrollo
+- Definición inicial de convenciones de trabajo colaborativo
 
 ## [0.1.0] - 2026-04-19
 
-### Added
+### Agregado
 - Inicio del proyecto
 - Creación del repositorio
