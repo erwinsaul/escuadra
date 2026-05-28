@@ -1,6 +1,6 @@
-from typing import Dict
+from typing import Dict, Any
 
-def calculator_momento_mx(longitud: float, carga: float, tipo_carga: str = 'puntual_central') -> Dict[str, float]:
+def calcular_momento_max(longitud: float, carga: float, tipo_carga: str = 'puntual_central') -> Dict[str, Any]:
     """
     Calcula el momento de flexión en un elemento civil.
 
@@ -10,10 +10,10 @@ def calculator_momento_mx(longitud: float, carga: float, tipo_carga: str = 'punt
         tipo_carga (str): El tipo de carga ('puntual_central' o 'distribuida').
 
     Returns:
-        Dict[str, float]: Un diccionario con los siguientes campos:
-            - momento_mx: El momento de flexión en N.mm
-            - posicion: La posicion del punto de aplicación de la carga (en metros)
-            - unidad: La unidad del momento de flexión
+        Dict[str, Any]: Un diccionario con los siguientes campos:
+            - momento_max: El momento de flexión máximo.
+            - posicion: La posicion del punto de aplicación de la carga (en metros).
+            - unidad: La unidad del momento de flexión ('kN·m').
 
     Raises:
         ValueError: Si el tipo_carga no es 'puntual_central' ni 'distribuida',
@@ -31,7 +31,7 @@ def calculator_momento_mx(longitud: float, carga: float, tipo_carga: str = 'punt
         momento = carga * (longitud ** 2) / 8
     
     return {
-        'momento_mx': float(momento),
-        'posicion': longitud / 2,
-        'unidad': 'N.mm'
+        'momento_max': float(momento),
+        'posicion': float(longitud / 2),
+        'unidad': 'kN·m'
     }
