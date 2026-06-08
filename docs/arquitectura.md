@@ -1,40 +1,101 @@
 # Arquitectura del Sistema - Proyecto Escuadra
 
 ## 1. Visión General
-El proyecto **Escuadra** está diseñado como una suite modular de herramientas de cálculo para ingeniería civil y mecánica. La arquitectura sigue el principio de **Separación de Responsabilidades**, dividiendo claramente la lógica matemática de la interfaz de usuario para garantizar precisión, mantenibilidad y escalabilidad.
 
-## 2. Componentes Principales
-- **Capa de Aplicación (Core)**: Contiene los algoritmos de cálculo, fórmulas físicas y la lógica de negocio. Es independiente de la interfaz.
-- **Capa de Presentación (UI)**: Gestiona la interacción con el usuario, captura de datos y visualización de resultados gráficos.
-- **Capa de Soporte (Utils)**: Incluye conversores de unidades técnicas, formateadores de precisión numérica y manejo de errores.
+El proyecto **Escuadra** está diseñado como una plataforma modular de herramientas orientadas a distintas ramas de la ingeniería. La arquitectura sigue un principio de **Separación de Responsabilidades**, permitiendo que cada área de ingeniería implemente sus propias soluciones de forma independiente.
 
-## 3. Diagrama de Arquitectura
-El sistema utiliza una arquitectura de capas simple:
-`[ Usuario ] <--> [ Capa de Interfaz (UI) ] <--> [ Capa de Lógica (Core) ]`
+El sistema prioriza la escalabilidad, permitiendo agregar nuevas herramientas sin afectar el funcionamiento general.
 
-## 4. Tecnologías Utilizadas
+---
+## 2. Stack Tecnológico
 
 | Componente | Tecnología | Versión | Justificación |
 |---|---|---|---|
-| **Lenguaje Base** | Python | 3.10+ | Facilidad para el desarrollo de algoritmos de ingeniería. |
-| **Interfaz Gráfica** | Tkinter / PySide | Actual | Estándar robusto para aplicaciones de escritorio. |
-| **Cálculo Numérico** | NumPy | Actual | Alta precisión en operaciones vectoriales y matriciales. |
-| **Documentación** | Markdown | N/A | Estándar de la industria para documentación técnica en Git. |
+| **Lenguaje Base** | Python | 3.10+ | Amplio soporte para cálculo numérico y facilidad de uso |
+| **Interfaz gráfica** | PySide6 | 6.6+ | Framework Qt oficial para Python; permite crear UIs de escritorio multiplataforma |
+| **Testing** | pytest | 8+ | Framework estándar para pruebas en Python |
+| **Linter** | ruff | 0.4+ | Análisis estático y formateo de código rápido|
+| **Gestión de deps** | pip |---| Manejo de dependencias mediante requirements.txt y pyproject.toml |
+| **Documentación** | Markdown|---| Estándar para documentación en repositorios Git |
+
+
+## 3. Por qué Python y no Node.js
+
+El repositorio fue inicialmente documentado con instrucciones de Node.js (npm install, node index.js), lo que generaba ambigüedad. La decisión de usar Python se basa en:
+
+* Todo el código fuente del proyecto (src/escuadra/) está escrito en Python.
+* Los módulos de cálculo de ingeniería (civil, eléctrica, matemáticas, sistemas) utilizan Python puro.
+* El sistema de empaquetado usa pyproject.toml y setuptools, herramientas del ecosistema Python.
+* PySide6 es una librería Python para interfaces gráficas, sin dependencia de Node.js.
+* Los tests están escritos con pytest, no con ningún framework de JavaScript.
+
+---
+
+## 3. Componentes Principales
+
+* Core (src/escuadra/core/): Lógica central del sistema, dispatcher y registro de herramientas.
+* Módulos de ingeniería (src/escuadra/modulos/): Cada rama de ingeniería tiene su propio subdirectorio    con herramientas independientes.
+* Interfaz de usuario (src/escuadra/ui/): Componentes visuales basados en PySide6.
+* Utilidades (src/escuadra/utils/): Funciones auxiliares, validaciones y helpers compartidos.
+* Configuración (src/escuadra/config/): Carga y gestión de configuración del proyecto.
+* CLI (src/escuadra/cli.py): Interfaz de línea de comandos para acceder a las herramientas.
+
+---
+
+## 4. Organización por Ramas de Ingeniería
+
+**El sistema está estructurado en módulos independientes según cada área:**
+
+escuadra/
+├── src/
+│   └── escuadra/
+│       ├── core/           # Dispatcher y registro de herramientas
+│       ├── modulos/
+│       │   ├── civil/      # Herramientas de ingeniería civil
+│       │   ├── electrica/  # Herramientas de ingeniería eléctrica
+│       │   ├── geometria/  # Herramientas de geometría
+│       │   ├── matematicas/# Herramientas matemáticas
+│       │   └── sistemas/   # Herramientas de ingeniería de sistemas
+│       ├── ui/             # Componentes de interfaz (PySide6)
+│       ├── utils/          # Utilidades compartidas
+│       └── config/         # Configuración
+├── docs/                   # Documentación del proyecto
+├── tests/                  # Pruebas automatizadas
+├── requirements.txt        # Dependencias de producción
+├── requirements-dev.txt    # Dependencias de desarrollo
+└── pyproject.toml          # Metadatos y configuración del paquete
+
+
+---
+
 
 ## 5. Decisiones de Diseño
 
-### Decisión 1: Estructura Basada en Módulos
-**Contexto:** El sistema crecerá con múltiples herramientas (vigas, conversor, estadística).
-**Decisión:** Cada herramienta vivirá en su propio submódulo dentro de `src/core`.
-**Consecuencias:** Permite que varios desarrolladores trabajen en herramientas distintas sin causar conflictos de código.
+### Decisión 1: Arquitectura Modular por rama de Ingeniería
+**Contexto:** El proyecto cubre múltiples áreas de ingeniería con necesidades distintas.  
+**Decisión:** Separar cada rama en módulos independientes dentro de src/escuadra/modulos/ 
+**Consecuencias:** Permite desarrollo paralelo sin conflictos y facilita agregar nuevas herramientas.
 
-### Decisión 2: Precisión de Punto Flotante
-**Contexto:** Un error de decimales en ingeniería puede ser crítico.
-**Decisión:** Se implementa un estándar de precisión de $10^{-6}$ en todos los resultados.
-**Consecuencias:** Seguridad técnica en los reportes generados por la suite.
+---
+
+### Decisión 2: Interfaz gráfica con PySide6
+**Contexto:** Se requiere una aplicación de escritorio accesible para estudiantes y profesionales. 
+**Decisión:** Usar PySide6 como framework de UI, con componentes reutilizables en src/escuadra/ui/.  
+**Consecuencias:** Interfaz multiplataforma (Windows, Linux, macOS) con el binding oficial de Qt para Python.
+
+---
+
+### Decisión 3: Módulos de cálculo independientes de la UI
+**Contexto:** Las funciones de cálculo deben poder usarse desde la UI, la CLI o directamente como librería.  
+**Decisión:** Separar la lógica de cálculo (módulos) de la capa de presentación (ui, cli).  
+**Consecuencias:** Código reutilizable y más fácil de testear de forma aislada.
+
+---
 
 ## 6. Flujo de Datos
-1. El usuario ingresa parámetros técnicos en la **UI**.
-2. La UI envía los datos a la función correspondiente en el **Core**.
-3. El Core procesa el cálculo y aplica las constantes de ingeniería.
-4. El resultado se devuelve a la UI para ser mostrado con el formato técnico adecuado.
+
+1. El usuario interactúa con la UI (PySide6) o la CLI.
+2. La interfaz recibe los parámetros de entrada y los valida.
+3. Se invoca la función del módulo correspondiente (ej. calcular_reacciones).
+4. El módulo procesa los datos usando matemática pura de Python.
+5. El resultado se devuelve a la interfaz y se muestra al usuario.

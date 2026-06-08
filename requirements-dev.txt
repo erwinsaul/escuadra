@@ -1,2 +1,5 @@
 # dependencias de desarrollo
-pytest
+pytest>=8.0
+ruff>=0.4
+pre-commit>=3.7
+build>=1.2

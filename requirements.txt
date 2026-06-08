@@ -1,1 +1,2 @@
-# dependecias de produccion
+PySide6>=6.6
+pyyaml
