@@ -34,9 +34,7 @@ def get_tools():
     """Devuelve las herramientas registradas."""
 
     if not MODULOS_DIR.exists() or not any(MODULOS_DIR.iterdir()):
-        logger.warning(
-            "No se encontraron herramientas en el directorio modulos."
-        )
+        logger.warning("No se encontraron herramientas en el directorio modulos.")
         return []
 
     return _TOOLS.copy()
