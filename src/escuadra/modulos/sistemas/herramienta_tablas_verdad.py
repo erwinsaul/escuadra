@@ -1,14 +1,21 @@
-import re
 import itertools
-from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QPushButton,
-    QTableWidget, QTableWidgetItem, QLabel, QMessageBox
-)
-from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QClipboard, QGuiApplication
+import re
 
-from escuadra.core.herramienta import Herramienta
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QGuiApplication
+from PyQt6.QtWidgets import (
+    QLabel,
+    QLineEdit,
+    QMessageBox,
+    QPushButton,
+    QTableWidget,
+    QTableWidgetItem,
+    QVBoxLayout,
+    QWidget,
+)
+
 from escuadra.core.carrera import Carrera
+from escuadra.core.herramienta import Herramienta
 
 
 class HerramientaTablasVerdad(Herramienta):

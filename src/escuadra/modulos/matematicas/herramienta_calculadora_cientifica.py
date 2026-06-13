@@ -1,8 +1,10 @@
 import math
+
 from PySide6.QtWidgets import QWidget
 
-from escuadra.core.herramienta import Herramienta
 from escuadra.core.carrera import Carrera
+from escuadra.core.herramienta import Herramienta
+
 
 class HerramientaCalculadoraCientifica(Herramienta):
     nombre = "Calculadora científica"
@@ -38,10 +40,10 @@ class HerramientaCalculadoraCientifica(Herramienta):
 
         try:
             resultado = eval(expresion_limpia, {"__builtins__": None}, entorno_seguro)
-            
+
             if not isinstance(resultado, (int, float)):
                 raise ValueError("Expresión inválida")
-                
+
             return float(resultado)
 
         except ZeroDivisionError:

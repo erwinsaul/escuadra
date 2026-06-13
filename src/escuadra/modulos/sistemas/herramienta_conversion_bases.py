@@ -4,13 +4,16 @@ Convierte entre decimal, binario, octal y hexadecimal.
 """
 
 from PySide6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout,
-    QLineEdit, QLabel, QPushButton,
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+    QPushButton,
+    QVBoxLayout,
+    QWidget,
 )
 
-from escuadra.core.herramienta import Herramienta
 from escuadra.core.carrera import Carrera
-
+from escuadra.core.herramienta import Herramienta
 
 # Logica de conversion
 

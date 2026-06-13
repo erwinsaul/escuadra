@@ -1,5 +1,6 @@
 import math
 
+
 def cartesiana_a_polar(x, y):
     """Convierte coordenadas cartesianas (x, y) a polares (r, theta_grados)."""
     r = math.sqrt(x**2 + y**2)

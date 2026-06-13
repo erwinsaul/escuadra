@@ -5,6 +5,7 @@ consultando dinámicamente al registry.
 
 import importlib
 import sys
+
 from escuadra.core import registry
 
 

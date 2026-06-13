@@ -1,15 +1,16 @@
 from PySide6.QtWidgets import (
-    QWidget,
-    QVBoxLayout,
+    QComboBox,
     QHBoxLayout,
     QLabel,
     QLineEdit,
     QPushButton,
-    QComboBox,
+    QVBoxLayout,
+    QWidget,
 )
 
-from escuadra.core.herramienta import Herramienta
 from escuadra.core.carrera import Carrera
+from escuadra.core.herramienta import Herramienta
+
 
 def decimal_a_complemento(numero: int, bits: int) -> str:
     minimo = -(2 ** (bits - 1))
@@ -87,7 +88,7 @@ class HerramientaComplementoA2(Herramienta):
       self.binario_output = QLineEdit()
       self.binario_output.setReadOnly(True)
       layout.addWidget(self.binario_output)
-  
+
     # Complemento a 2 -> Decimal
       layout.addWidget(QLabel("Número binario:"))
 
@@ -124,7 +125,7 @@ class HerramientaComplementoA2(Herramienta):
 
       widget.setLayout(layout)
       return widget
-  
+
     def _actualizar_rango(self):
         bits = int(self.bits_combo.currentText())
 

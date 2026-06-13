@@ -1,11 +1,11 @@
 from PySide6.QtWidgets import (
-    QWidget,
-    QVBoxLayout,
-    QLabel,
     QComboBox,
+    QLabel,
     QLineEdit,
-    QPushButton,
     QMessageBox,
+    QPushButton,
+    QVBoxLayout,
+    QWidget,
 )
 
 from escuadra.core.carrera import Carrera
