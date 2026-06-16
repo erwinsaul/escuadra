@@ -53,15 +53,42 @@ source .venv/bin/activate
 > El prefijo `(.venv)` en la terminal confirma que el entorno está activo.
 
 ## 3. Instalar dependencias de desarrollo
-
+ 
 ### Windows / Linux / macOS:
-
+ 
+Este proyecto tiene dependencias en dos fuentes: `requirements-dev.txt` para herramientas como `pre-commit` y `build`, y `pyproject.toml` para las dependencias del proyecto.
+ 
+Instala primero las dependencias de desarrollo:
+ 
+```bash
+pip install -r requirements-dev.txt
+```
+ 
+Luego instala el proyecto en modo editable:
+ 
 ```bash
 pip install -e ".[dev]"
 ```
+ 
+Esto instalará las dependencias necesarias para desarrollo, testing y herramientas de calidad de código, además de permitir que los cambios realizados en el código fuente se reflejen automáticamente sin necesidad de reinstalar el paquete.
+ 
+## 4. Instalar los hooks de pre-commit
+ 
+### Windows / Linux / macOS:
+ 
+```bash
+pre-commit install
+```
+ 
+Este comando instala los hooks de pre-commit configurados por el proyecto. A partir de este momento, cada vez que realices un commit, Git ejecutará automáticamente las verificaciones definidas por el proyecto antes de aceptar el commit.
+ 
+> Este paso es **obligatorio** para asegurar que todos los cambios cumplan los estándares de calidad y formato establecidos por el proyecto.
 
-Esto instalará el proyecto en modo editable junto con las dependencias necesarias para desarrollo, testing y herramientas de calidad de código.
-
+Para verificar que los hooks quedaron instalados correctamente:
+ 
+```bash
+pre-commit run --all-files
+```
 ---
 
 # Flujo de trabajo

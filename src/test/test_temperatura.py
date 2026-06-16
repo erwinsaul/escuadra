@@ -1,11 +1,6 @@
 import pytest
 
-from escuadra.modulos.matematicas.conversor_temperatura import (
-    c_to_k,
-    k_to_c,
-    f_to_k,
-    k_to_f
-)
+from escuadra.modulos.matematicas.conversor_temperatura import c_to_k, f_to_k, k_to_c, k_to_f
 
 
 def test_celsius_to_kelvin():
