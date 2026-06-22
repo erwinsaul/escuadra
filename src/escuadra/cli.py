@@ -4,6 +4,7 @@ Punto de entrada principal con subcomandos para las herramientas.
 """
 
 import argparse
+import sys
 
 __version__ = "0.1.0"
 
@@ -74,7 +75,7 @@ def main():
 
     if args.herramienta is None:
         parser.print_help()
-        return
+        sys.exit(0)
 
     ejecutar_herramienta(args)
 
