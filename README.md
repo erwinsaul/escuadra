@@ -1,6 +1,26 @@
 # Escuadra - Calculadora Técnica para Ingeniería
 
+[![Python CI](https://github.com/sis-inf/escuadra/actions/workflows/ci.yml/badge.svg)](https://github.com/sis-inf/escuadra/actions/workflows/ci.yml)
+[![Licencia MIT](https://img.shields.io/badge/licencia-MIT-blue.svg)](LICENSE)
+
 Una aplicación de escritorio que centraliza herramientas de cálculo especializadas para estudiantes y docentes de ingeniería.
+
+---
+
+## Inicio rápido
+
+```bash
+# 1. Clonar el repositorio y entrar al directorio
+git clone https://github.com/sis-inf/escuadra.git && cd escuadra
+
+# 2. Crear entorno virtual e instalar dependencias
+python -m venv .venv && source .venv/bin/activate && pip install -e ".[dev]"
+
+# 3. Ejecutar la aplicación
+python -m escuadra
+```
+
+> En Windows reemplaza `source .venv/bin/activate` por `.venv\Scripts\activate`
 
 ---
 
@@ -92,4 +112,5 @@ source .venv/bin/activate
 .venv\Scripts\activate
 
 # Instalar en modo desarrollo
-pip install -e .
+pip install -e ".[dev]"
+```
