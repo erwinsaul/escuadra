@@ -6,6 +6,28 @@ Punto de entrada principal con subcomandos para las herramientas.
 import argparse
 import sys
 
+def verificar_entorno():
+    """Verifica la versión de Python y la disponibilidad de PySide6."""
+
+    if sys.version_info < (3, 10):
+        print(
+            f"Error: Escuadra requiere Python 3.10 o superior.\n"
+            f"Versión detectada: {sys.version.split()[0]}\n"
+            "Actualice Python e inténtelo nuevamente."
+        )
+        sys.exit(1)
+
+    try:
+        import PySide6
+    except ImportError:
+        print(
+            "Error: PySide6 no está instalado.\n"
+            "Instálelo ejecutando:\n"
+            "    pip install PySide6"
+        )
+        sys.exit(1)
+
+
 __version__ = "0.1.0"
 
 # Agregar aqui los modulos cuando esten implementados
@@ -43,6 +65,9 @@ def ejecutar_herramienta(args):
 
 def main():
     """Punto de entrada principal del CLI de Escuadra."""
+    
+    verificar_entorno()
+
     parser = argparse.ArgumentParser(
         prog="escuadra",
         description="Herramientas de cálculo de ingeniería civil y eléctrica."
