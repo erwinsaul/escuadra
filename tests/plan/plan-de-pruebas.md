@@ -52,3 +52,78 @@ Garantizar la fiabilidad, precisión numérica y estabilidad de la suite de cál
 | Desbordamiento de memoria (grandes datos) | Media | Alto | Implementación de pruebas de estrés y límites de entrada. |
 | Inconsistencia en CI (Ubuntu) vs Local | Baja | Medio | Uso de contenedores o entornos estandarizados en GitHub Actions. |
 | Fórmulas matemáticas mal implementadas | Media | Crítico | Revisión por pares y contraste con software de ingeniería (Matlab/Excel). |
+
+## 8. Plan de pruebas para módulos del sprint actual
+
+### 8.1. Módulo Civil (`modulos/civil/`)
+
+#### Funciones a probar
+
+| Función | Descripción |
+|---------|-------------|
+| `calcular_terreno()` | Calcula áreas y perímetros de terrenos |
+| `calcular_materiales()` | Estima cantidad de materiales necesarios |
+| `validar_normativa()` | Valida que el diseño cumpla con normativas |
+
+#### Casos de prueba recomendados
+
+| Tipo | Descripción |
+|------|-------------|
+| **Normales** | Datos típicos de entrada (terrenos regulares) |
+| **Borde** | Valores límite (áreas mínimas/máximas) |
+| **Error** | Datos inválidos (valores negativos, tipos incorrectos) |
+
+#### Cobertura objetivo
+
+- **Mínimo**: 80%
+- **Ideal**: 90%
+
+---
+
+### 8.2. Módulo Eléctrica (`modulos/electrica/`)
+
+#### Funciones a probar
+
+| Función | Descripción |
+|---------|-------------|
+| `calcular_corriente()` | Calcula corriente eléctrica con ley de Ohm |
+| `calcular_potencia()` | Calcula potencia eléctrica |
+| `calcular_resistencia()` | Calcula resistencia equivalente |
+
+#### Casos de prueba recomendados
+
+| Tipo | Descripción |
+|------|-------------|
+| **Normales** | Valores típicos de resistencia y voltaje |
+| **Borde** | Resistencias cero o infinito (circuitos abiertos) |
+| **Error** | Valores negativos, divisiones por cero |
+
+#### Cobertura objetivo
+
+- **Mínimo**: 85%
+- **Ideal**: 95%
+
+---
+
+### 8.3. Módulo Geometría (`modulos/geometria/`)
+
+#### Funciones a probar
+
+| Función | Descripción |
+|---------|-------------|
+| `area_circulo()` | Calcula área de un círculo |
+| `perimetro_rectangulo()` | Calcula perímetro de un rectángulo |
+| `volumen_cilindro()` | Calcula volumen de un cilindro |
+
+#### Casos de prueba recomendados
+
+| Tipo | Descripción |
+|------|-------------|
+| **Normales** | Figuras con dimensiones típicas |
+| **Borde** | Radios o lados iguales a cero |
+| **Error** | Tipos de datos incorrectos, valores negativos |
+
+#### Cobertura objetivo
+
+- **Mínimo**: 80%
+- **Ideal**: 90%
