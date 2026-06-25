@@ -2,13 +2,13 @@
 
 Este directorio contiene la documentación de los módulos disponibles en Escuadra.
 
-| Módulo | Descripción | Lenguaje | Documentación |
-|---------|-------------|-----------|--------------|
-| Civil | Herramientas de ingeniería civil y análisis estructural | Python | [civil.md](civil.md) |
-| Eléctrica | Herramientas de ingeniería eléctrica y circuitos | Python | [electrica.md](electrica.md) |
-| Geometría | Herramientas de geometría y cálculo de áreas y volúmenes | Python | [geometria.md](geometria.md) |
-| Matemáticas | Herramientas matemáticas y conversores | Python | [matematicas.md](matematicas.md) |
-| Sistemas | Herramientas de sistemas y utilidades | Python | [sistemas.md](sistemas.md) |
+| Módulo | Descripción | Herramientas | Lenguaje | Documentación |
+|--------|-------------|--------------|----------|---------------|
+| Civil | Herramientas de ingeniería civil y análisis estructural | 6 | Python | [civil.md](civil.md) |
+| Eléctrica | Herramientas de ingeniería eléctrica y circuitos | 6 | Python | [electrica.md](electrica.md) |
+| Geometría | Herramientas de geometría y cálculo de áreas y volúmenes | 13 | Python | [geometria.md](geometria.md) |
+| Matemáticas | Herramientas matemáticas y conversores | 5 | Python | [matematicas.md](matematicas.md) |
+| Sistemas | Herramientas de sistemas y utilidades | 7 | Python | [sistemas.md](sistemas.md) |
 
 ## Módulos planificados
 
