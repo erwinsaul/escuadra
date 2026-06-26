@@ -65,3 +65,41 @@ jobs:
       - name: Run mypy
         run: mypy src/escuadra
 
+  changelog-check:
+    name: Changelog check
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check for skip-changelog label
+        id: check-label
+        run: |
+          LABELS=$(gh pr view ${{ github.event.pull_request.number }} --json labels -q '.labels[].name')
+          if echo "$LABELS" | grep -q "skip-changelog"; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+            echo "PR has 'skip-changelog' label, skipping changelog check"
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check if src/escuadra was modified
+        id: check-src
+        if: steps.check-label.outputs.skip == 'false'
+        run: |
+          git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -q "^src/escuadra/" && echo "modified=true" >> $GITHUB_OUTPUT || echo "modified=false" >> $GITHUB_OUTPUT
+      - name: Check if CHANGELOG.md was modified
+        id: check-changelog
+        if: steps.check-src.outputs.modified == 'true'
+        run: |
+          git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -q "^CHANGELOG.md" && echo "modified=true" >> $GITHUB_OUTPUT || echo "modified=false" >> $GITHUB_OUTPUT
+      - name: Fail if CHANGELOG.md not updated
+        if: steps.check-changelog.outputs.modified == 'false'
+        run: |
+          echo "ERROR: Este PR modifica archivos en src/escuadra/ pero no actualiza CHANGELOG.md"
+          echo "Por favor, actualiza CHANGELOG.md para documentar los cambios realizados."
+          echo "Si este cambio no requiere actualización del changelog, agrega la etiqueta 'skip-changelog' al PR."
+          exit 1
+
