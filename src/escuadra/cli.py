@@ -9,18 +9,14 @@ import sys
 from escuadra.cli_interactivo import ejecutar_interactivo
 
 def verificar_entorno():
-    """Verifica la versión de Python y la disponibilidad de PySide6."""
-
     if sys.version_info < (3, 10):
-        print(
-            f"Error: Escuadra requiere Python 3.10 o superior.\n"
-            f"Versión detectada: {sys.version.split()[0]}\n"
-            "Actualice Python e inténtelo nuevamente."
-        )
+        print("Error: Escuadra requiere Python 3.10 o superior.")
         sys.exit(1)
 
     try:
-        import PySide6
+        import importlib.util
+        if importlib.util.find_spec("PySide6") is None:
+            raise ImportError
     except ImportError:
         print(
             "Error: PySide6 no está instalado.\n"

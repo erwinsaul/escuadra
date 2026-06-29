@@ -2,7 +2,6 @@
 Pruebas para el módulo historial.py
 """
 
-import pytest
 
 from escuadra.core.historial import Historial
 
