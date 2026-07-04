@@ -4,6 +4,27 @@ Punto de entrada principal con subcomandos para las herramientas.
 """
 
 import argparse
+import sys
+
+from escuadra.cli_interactivo import ejecutar_interactivo
+
+def verificar_entorno():
+    if sys.version_info < (3, 10):
+        print("Error: Escuadra requiere Python 3.10 o superior.")
+        sys.exit(1)
+
+    try:
+        import importlib.util
+        if importlib.util.find_spec("PySide6") is None:
+            raise ImportError
+    except ImportError:
+        print(
+            "Error: PySide6 no está instalado.\n"
+            "Instálelo ejecutando:\n"
+            "    pip install PySide6"
+        )
+        sys.exit(1)
+
 
 __version__ = "0.1.0"
 
@@ -42,42 +63,62 @@ def ejecutar_herramienta(args):
 
 def main():
     """Punto de entrada principal del CLI de Escuadra."""
-    parser = argparse.ArgumentParser(
-        prog="escuadra",
-        description="Herramientas de cálculo de ingeniería civil y eléctrica."
-    )
+    
+    try:
+        verificar_entorno()
 
-    parser.add_argument(
-        "--version", "-v",
-        action="version",
-        version=f"%(prog)s {__version__}"
-    )
+        parser = argparse.ArgumentParser(
+            prog="escuadra",
+            description="Herramientas de cálculo de ingeniería civil y eléctrica."
+        )
 
-    subparsers = parser.add_subparsers(
-        title="herramientas",
-        dest="herramienta",
-        help="Herramienta a ejecutar"
-    )
+        parser.add_argument(
+            "--version", "-v",
+            action="version",
+            version=f"%(prog)s {__version__}"
+        )
 
-    # Subcomando: viga
-    viga_parser = subparsers.add_parser("viga", help="Cálculo de reacciones en vigas")
-    viga_parser.add_argument("--longitud", type=float, required=True, help="Longitud de la viga en metros")
-    viga_parser.add_argument("--carga", type=float, required=True, help="Carga puntual en kN")
+        subparsers = parser.add_subparsers(
+            title="herramientas",
+            dest="herramienta",
+            help="Herramienta a ejecutar"
+        )
 
-    # Subcomando: tension
-    tension_parser = subparsers.add_parser("tension", help="Cálculo de caída de tensión")
-    tension_parser.add_argument("--longitud", type=float, required=True, help="Longitud del conductor en metros")
-    tension_parser.add_argument("--corriente", type=float, required=True, help="Corriente en amperios")
-    tension_parser.add_argument("--seccion", type=float, required=True, help="Sección del conductor en mm²")
+        # Subcomando: interactivo
+        interactivo_parser = subparsers.add_parser(
+            "interactivo",
+            help="Modo interactivo paso a paso (REPL)"
+        )
 
-    args = parser.parse_args()
+        # Subcomando: viga
+        viga_parser = subparsers.add_parser("viga", help="Cálculo de reacciones en vigas")
+        viga_parser.add_argument("--longitud", type=float, required=True, help="Longitud de la viga en metros")
+        viga_parser.add_argument("--carga", type=float, required=True, help="Carga puntual en kN")
 
-    if args.herramienta is None:
-        parser.print_help()
-        return
+        # Subcomando: tension
+        tension_parser = subparsers.add_parser("tension", help="Cálculo de caída de tensión")
+        tension_parser.add_argument("--longitud", type=float, required=True, help="Longitud del conductor en metros")
+        tension_parser.add_argument("--corriente", type=float, required=True, help="Corriente en amperios")
+        tension_parser.add_argument("--seccion", type=float, required=True, help="Sección del conductor en mm²")
 
-    ejecutar_herramienta(args)
+        args = parser.parse_args()
+
+        if args.herramienta is None:
+            parser.print_help()
+            sys.exit(0)
+             
+        # Modo interactivo
+        if args.herramienta == "interactivo":
+           ejecutar_interactivo()
+           return
+
+        ejecutar_herramienta(args)
+
+    except KeyboardInterrupt:
+        print("\nOperación cancelada por el usuario.")
+        sys.exit(130)
 
 
 if __name__ == "__main__":
     main()
+    
