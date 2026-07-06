@@ -6,7 +6,6 @@ Punto de entrada principal con subcomandos para las herramientas.
 import argparse
 import sys
 import json
-import csv
 
 from escuadra.cli_interactivo import ejecutar_interactivo
 
@@ -31,8 +30,6 @@ def verificar_entorno():
 
 __version__ = "0.1.0"
 
-
-# Agregar aqui los modulos cuando esten implementados
 MODULOS_DISPONIBLES = set()
 
 
@@ -44,42 +41,9 @@ def herramienta_no_disponible(nombre_herramienta):
     )
 
 
-def exportar_resultado(ruta, resultado):
-    """Exporta resultados del CLI en formato JSON o CSV."""
-
-    if ruta.endswith(".json"):
-        with open(ruta, "w", encoding="utf-8") as archivo:
-            json.dump(
-                resultado,
-                archivo,
-                indent=4,
-                ensure_ascii=False
-            )
-
-    elif ruta.endswith(".csv"):
-        with open(
-            ruta,
-            "w",
-            encoding="utf-8",
-            newline=""
-        ) as archivo:
-            writer = csv.writer(archivo)
-
-            if isinstance(resultado, dict):
-                writer.writerow(resultado.keys())
-                writer.writerow(resultado.values())
-            else:
-                writer.writerow(["resultado"])
-                writer.writerow([resultado])
-
-    else:
-        print("Formato no soportado. Use archivos .json o .csv")
-
-
 def ejecutar_herramienta(args):
     """
     Ejecuta el subcomando correspondiente si el módulo existe.
-    En caso contrario, muestra un mensaje.
     """
 
     herramienta = args.herramienta
@@ -99,14 +63,24 @@ def ejecutar_herramienta(args):
         return
 
     kwargs = vars(args).copy()
-    kwargs.pop("herramienta")
 
-    salida = kwargs.pop("salida", None)
+    kwargs.pop("herramienta")
+    salida_json = kwargs.pop("json")
 
     resultado = modulo.ejecutar(**kwargs)
 
-    if salida:
-        exportar_resultado(salida, resultado)
+    if salida_json:
+        print(
+            json.dumps(
+                {
+                    "herramienta": herramienta,
+                    "parametros": kwargs,
+                    "resultado": resultado,
+                },
+                ensure_ascii=False,
+                indent=2
+            )
+        )
     else:
         print(resultado)
 
@@ -130,8 +104,9 @@ def main():
         )
 
         parser.add_argument(
-            "--salida",
-            help="Archivo donde exportar resultado (.json o .csv)"
+            "--json",
+            action="store_true",
+            help="Muestra la salida en formato JSON"
         )
 
         subparsers = parser.add_subparsers(
@@ -140,13 +115,11 @@ def main():
             help="Herramienta a ejecutar"
         )
 
-        # Subcomando: interactivo
         subparsers.add_parser(
             "interactivo",
             help="Modo interactivo paso a paso (REPL)"
         )
 
-        # Subcomando: viga
         viga_parser = subparsers.add_parser(
             "viga",
             help="Cálculo de reacciones en vigas"
@@ -166,7 +139,6 @@ def main():
             help="Carga puntual en kN"
         )
 
-        # Subcomando: tension
         tension_parser = subparsers.add_parser(
             "tension",
             help="Cálculo de caída de tensión"
@@ -199,7 +171,6 @@ def main():
             parser.print_help()
             sys.exit(0)
 
-        # Modo interactivo
         if args.herramienta == "interactivo":
             ejecutar_interactivo()
             return
