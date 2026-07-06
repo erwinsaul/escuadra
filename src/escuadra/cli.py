@@ -5,8 +5,11 @@ Punto de entrada principal con subcomandos para las herramientas.
 
 import argparse
 import sys
+import json
+import csv
 
 from escuadra.cli_interactivo import ejecutar_interactivo
+
 
 def verificar_entorno():
     if sys.version_info < (3, 10):
@@ -28,17 +31,57 @@ def verificar_entorno():
 
 __version__ = "0.1.0"
 
+
 # Agregar aqui los modulos cuando esten implementados
 MODULOS_DISPONIBLES = set()
 
+
 def herramienta_no_disponible(nombre_herramienta):
     """Muestra mensaje para herramientas no implementadas."""
-    print(f"La herramienta '{nombre_herramienta}' aún está en construcción y no está disponible.")
+    print(
+        f"La herramienta '{nombre_herramienta}' aún está en construcción "
+        "y no está disponible."
+    )
+
+
+def exportar_resultado(ruta, resultado):
+    """Exporta resultados del CLI en formato JSON o CSV."""
+
+    if ruta.endswith(".json"):
+        with open(ruta, "w", encoding="utf-8") as archivo:
+            json.dump(
+                resultado,
+                archivo,
+                indent=4,
+                ensure_ascii=False
+            )
+
+    elif ruta.endswith(".csv"):
+        with open(
+            ruta,
+            "w",
+            encoding="utf-8",
+            newline=""
+        ) as archivo:
+            writer = csv.writer(archivo)
+
+            if isinstance(resultado, dict):
+                writer.writerow(resultado.keys())
+                writer.writerow(resultado.values())
+            else:
+                writer.writerow(["resultado"])
+                writer.writerow([resultado])
+
+    else:
+        print("Formato no soportado. Use archivos .json o .csv")
+
 
 def ejecutar_herramienta(args):
     """
-    Ejecuta el subcomando correspondiente si el módulo existe. En caso contrario, muestra un mensaje
+    Ejecuta el subcomando correspondiente si el módulo existe.
+    En caso contrario, muestra un mensaje.
     """
+
     herramienta = args.herramienta
 
     if herramienta not in MODULOS_DISPONIBLES:
@@ -58,12 +101,19 @@ def ejecutar_herramienta(args):
     kwargs = vars(args).copy()
     kwargs.pop("herramienta")
 
-    modulo.ejecutar(**kwargs)
+    salida = kwargs.pop("salida", None)
+
+    resultado = modulo.ejecutar(**kwargs)
+
+    if salida:
+        exportar_resultado(salida, resultado)
+    else:
+        print(resultado)
 
 
 def main():
     """Punto de entrada principal del CLI de Escuadra."""
-    
+
     try:
         verificar_entorno()
 
@@ -73,9 +123,15 @@ def main():
         )
 
         parser.add_argument(
-            "--version", "-v",
+            "--version",
+            "-v",
             action="version",
             version=f"%(prog)s {__version__}"
+        )
+
+        parser.add_argument(
+            "--salida",
+            help="Archivo donde exportar resultado (.json o .csv)"
         )
 
         subparsers = parser.add_subparsers(
@@ -85,32 +141,68 @@ def main():
         )
 
         # Subcomando: interactivo
-        interactivo_parser = subparsers.add_parser(
+        subparsers.add_parser(
             "interactivo",
             help="Modo interactivo paso a paso (REPL)"
         )
 
         # Subcomando: viga
-        viga_parser = subparsers.add_parser("viga", help="Cálculo de reacciones en vigas")
-        viga_parser.add_argument("--longitud", type=float, required=True, help="Longitud de la viga en metros")
-        viga_parser.add_argument("--carga", type=float, required=True, help="Carga puntual en kN")
+        viga_parser = subparsers.add_parser(
+            "viga",
+            help="Cálculo de reacciones en vigas"
+        )
+
+        viga_parser.add_argument(
+            "--longitud",
+            type=float,
+            required=True,
+            help="Longitud de la viga en metros"
+        )
+
+        viga_parser.add_argument(
+            "--carga",
+            type=float,
+            required=True,
+            help="Carga puntual en kN"
+        )
 
         # Subcomando: tension
-        tension_parser = subparsers.add_parser("tension", help="Cálculo de caída de tensión")
-        tension_parser.add_argument("--longitud", type=float, required=True, help="Longitud del conductor en metros")
-        tension_parser.add_argument("--corriente", type=float, required=True, help="Corriente en amperios")
-        tension_parser.add_argument("--seccion", type=float, required=True, help="Sección del conductor en mm²")
+        tension_parser = subparsers.add_parser(
+            "tension",
+            help="Cálculo de caída de tensión"
+        )
+
+        tension_parser.add_argument(
+            "--longitud",
+            type=float,
+            required=True,
+            help="Longitud del conductor en metros"
+        )
+
+        tension_parser.add_argument(
+            "--corriente",
+            type=float,
+            required=True,
+            help="Corriente en amperios"
+        )
+
+        tension_parser.add_argument(
+            "--seccion",
+            type=float,
+            required=True,
+            help="Sección del conductor en mm²"
+        )
 
         args = parser.parse_args()
 
         if args.herramienta is None:
             parser.print_help()
             sys.exit(0)
-             
+
         # Modo interactivo
         if args.herramienta == "interactivo":
-           ejecutar_interactivo()
-           return
+            ejecutar_interactivo()
+            return
 
         ejecutar_herramienta(args)
 
@@ -121,4 +213,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
