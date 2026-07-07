@@ -28,8 +28,8 @@ def hex_a_rgb(hex_str: str) -> tuple:
 
 def rgb_a_hsl(r: int, g: int, b: int) -> tuple:
     """
-    Convierte valores RGB (0-255) a HSL (h, s, l).
-    h está en el rango 0-360, s y l están en el rango 0-100.
+    Convierte valores RGB (0-255) a HSL (h, s, l_pct).
+    h está en el rango 0-360, s y l_pct están en el rango 0-100.
     """
     if not (0 <= r <= 255 and 0 <= g <= 255 and 0 <= b <= 255):
         raise ValueError("Los valores r, g, b deben estar en el rango [0, 255]")
@@ -60,6 +60,6 @@ def rgb_a_hsl(r: int, g: int, b: int) -> tuple:
 
     h = round(h_calc) % 360
     s = round(s_calc * 100)
-    lightness = round(l_calc * 100)
+    l_pct = round(l_calc * 100)
 
-    return (h, s, lightness)
+    return (h, s, l_pct)
