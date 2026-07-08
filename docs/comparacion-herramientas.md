@@ -131,6 +131,46 @@ La comparación presentada en este documento tiene fines informativos y refleja 
 
 ---
 
+# Resumen por escenario de uso
+
+La siguiente tabla resume qué herramienta puede resultar más adecuada según el tipo de necesidad.
+
+| Escenario | Herramienta recomendada | Motivo |
+|-----------|-------------------------|--------|
+| Resolver cálculos incluidos en los módulos de Escuadra | Escuadra | Proporciona herramientas específicas en una única aplicación y puede utilizarse localmente. |
+| Resolver problemas de distintas disciplinas o realizar cálculo simbólico avanzado | Wolfram Alpha | Ofrece un amplio conjunto de capacidades para diferentes áreas del conocimiento. |
+| Realizar un cálculo muy específico disponible en una página especializada | Calculadora especializada | Está diseñada para resolver un problema concreto de forma rápida. |
+| Trabajar sin conexión a Internet | Escuadra | Una vez instalada, puede ejecutarse sin depender de una conexión. |
+| Estudiar, adaptar o ampliar la implementación de una herramienta | Escuadra | Al ser un proyecto de código abierto, permite revisar y modificar su funcionamiento. |
+
+---
+
+# Factores para elegir una herramienta
+
+La elección de una herramienta depende del contexto y de los objetivos de cada usuario. Antes de decidir cuál utilizar, conviene considerar aspectos como:
+
+- El tipo de problema que se desea resolver.
+- La disponibilidad de conexión a Internet.
+- La necesidad de obtener explicaciones o procedimientos detallados.
+- La posibilidad de revisar o modificar los algoritmos utilizados.
+- La frecuencia con la que se utilizarán las herramientas disponibles.
+- Si se requiere una solución de propósito general o una enfocada en un área específica de la ingeniería.
+
+---
+
+## Ejemplos de casos de uso
+
+A continuación se presentan algunos ejemplos de situaciones en las que cada alternativa puede resultar apropiada.
+
+| Situación | Herramienta sugerida |
+|-----------|----------------------|
+| Un estudiante necesita utilizar varias herramientas de ingeniería durante una práctica o laboratorio. | Escuadra |
+| Un usuario requiere resolver una integral, una ecuación diferencial o una expresión simbólica compleja. | Wolfram Alpha |
+| Se necesita realizar rápidamente un cálculo puntual desde un navegador sin instalar software. | Calculadora especializada en línea |
+| Un desarrollador desea comprender, verificar o ampliar la implementación de una herramienta de cálculo. | Escuadra |
+
+Estas recomendaciones son orientativas. La herramienta más adecuada dependerá del problema que se quiera resolver y de las funcionalidades disponibles en cada momento.
+
 # Conclusión
 
 Escuadra no busca reemplazar plataformas consolidadas como Wolfram Alpha ni a las numerosas calculadoras especializadas disponibles en Internet. Su propósito es ofrecer una alternativa **gratuita, de código abierto, modular y orientada al ámbito académico**, concentrando en una sola aplicación herramientas útiles para distintas ramas de la ingeniería.
