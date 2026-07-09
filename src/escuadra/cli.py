@@ -9,6 +9,7 @@ import json
 import argcomplete
 
 from escuadra.cli_interactivo import ejecutar_interactivo
+from escuadra.core.registry import descubrir_herramientas
 
 
 def verificar_entorno():
@@ -31,7 +32,15 @@ def verificar_entorno():
 
 __version__ = "0.1.0"
 
-MODULOS_DISPONIBLES = set()
+
+def obtener_modulos_disponibles():
+    """
+    Obtiene las herramientas disponibles desde el registry.
+    """
+    return {
+        herramienta.nombre
+        for herramienta in descubrir_herramientas()
+    }
 
 
 def herramienta_no_disponible(nombre_herramienta):
@@ -49,7 +58,9 @@ def ejecutar_herramienta(args):
 
     herramienta = args.herramienta
 
-    if herramienta not in MODULOS_DISPONIBLES:
+    modulos_disponibles = obtener_modulos_disponibles()
+
+    if herramienta not in modulos_disponibles:
         herramienta_no_disponible(herramienta)
         return
 
@@ -121,50 +132,13 @@ def main():
             help="Modo interactivo paso a paso (REPL)"
         )
 
-        viga_parser = subparsers.add_parser(
-            "viga",
-            help="Cálculo de reacciones en vigas"
-        )
+        herramientas = descubrir_herramientas()
 
-        viga_parser.add_argument(
-            "--longitud",
-            type=float,
-            required=True,
-            help="Longitud de la viga en metros"
-        )
-
-        viga_parser.add_argument(
-            "--carga",
-            type=float,
-            required=True,
-            help="Carga puntual en kN"
-        )
-
-        tension_parser = subparsers.add_parser(
-            "tension",
-            help="Cálculo de caída de tensión"
-        )
-
-        tension_parser.add_argument(
-            "--longitud",
-            type=float,
-            required=True,
-            help="Longitud del conductor en metros"
-        )
-
-        tension_parser.add_argument(
-            "--corriente",
-            type=float,
-            required=True,
-            help="Corriente en amperios"
-        )
-
-        tension_parser.add_argument(
-            "--seccion",
-            type=float,
-            required=True,
-            help="Sección del conductor en mm²"
-        )
+        for herramienta in herramientas:
+            subparsers.add_parser(
+                herramienta.nombre,
+                help=herramienta.descripcion
+            )
 
         argcomplete.autocomplete(parser)
 
