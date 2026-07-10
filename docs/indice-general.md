@@ -1,124 +1,165 @@
 # Índice General de Documentación
 
-Índice navegable de todos los documentos del proyecto organizados por categoría.
+Índice navegable maestro de la documentación del proyecto Escuadra.
 
 ---
 
-##  Arquitectura y Diseño
+## Arquitectura y Diseño
 
-| Documento | Descripción |
-|-----------|-------------|
-| [arquitectura.md](arquitectura.md) | Arquitectura general del sistema |
-| [estructura-proyecto.md](estructura-proyecto.md) | Organización de carpetas y archivos |
-| [decisiones-arquitectura.md](decisiones-arquitectura.md) | Decisiones de diseño y arquitectura |
-| [requerimientos.md](requerimientos.md) | Requerimientos funcionales y no funcionales |
-| [limitaciones.md](limitaciones.md) | Limitaciones conocidas del sistema |
-
----
-
-##  Instalación y Configuración
-
-| Documento | Descripción |
-|-----------|-------------|
-| [instalacion.md](instalacion.md) | Guía de instalación del proyecto |
-| [configuracion.md](configuracion.md) | Configuración del sistema |
-| [dependencias.md](dependencias.md) | Dependencias del proyecto |
-| [desarrollo-local.md](desarrollo-local.md) | Configuración del entorno de desarrollo local |
-| [despliegue.md](despliegue.md) | Despliegue del sistema |
-| [empaquetado.md](empaquetado.md) | Empaquetado de la aplicación |
+- [arquitectura.md](arquitectura.md)
+- [estructura-proyecto.md](estructura-proyecto.md)
+- [decisiones-arquitectura.md](decisiones-arquitectura.md)
+- [requerimientos.md](requerimientos.md)
+- [limitaciones.md](limitaciones.md)
+- [modelo-resultado-calculo.md](modelo-resultado-calculo.md)
 
 ---
 
-##  Módulos
+## Instalación y Configuración
 
-| Documento | Descripción |
-|-----------|-------------|
-| [modulos/README.md](modulos/README.md) | Índice de módulos disponibles |
-| [modulos/civil.md](modulos/civil.md) | Módulo de Ingeniería Civil |
-| [modulos/electrica.md](modulos/electrica.md) | Módulo de Ingeniería Eléctrica |
-| [modulos/geometria.md](modulos/geometria.md) | Módulo de Geometría |
-| [modulos/matematicas.md](modulos/matematicas.md) | Módulo de Matemáticas |
-| [modulos/sistemas.md](modulos/sistemas.md) | Módulo de Sistemas |
-| [modulos/herramientas-sistemas-lineales-nxn.md](modulos/herramientas-sistemas-lineales-nxn.md) | Herramienta de sistemas lineales NxN |
+- [instalacion.md](instalacion.md)
+- [configuracion.md](configuracion.md)
+- [dependencias.md](dependencias.md)
+- [desarrollo-local.md](desarrollo-local.md)
+- [perfiles-configuracion.md](perfiles-configuracion.md)
 
 ---
 
-##  Herramientas
+## CLI
 
-| Documento | Descripción |
-|-----------|-------------|
-| [herramientas.md](herramientas.md) | Herramientas disponibles en el sistema |
-| [registro-herramientas.md](registro-herramientas.md) | Registro de herramientas del proyecto |
-| [comparacion-herramientas.md](comparacion-herramientas.md) | Comparación entre herramientas |
-| [preview-exportacion.md](preview-exportacion.md) | Vista previa de exportación |
+- [cli-referencia.md](cli-referencia.md)
+- [cli-modo-interactivo.md](cli-modo-interactivo.md)
 
 ---
 
-##  CLI y API
+## Interfaz de Usuario
 
-| Documento | Descripción |
-|-----------|-------------|
-| [api.md](api.md) | Documentación de la API |
-| [cli-referencia.md](cli-referencia.md) | Referencia de la línea de comandos |
+- [ui-pestanas-multiples.md](ui-pestanas-multiples.md)
 
 ---
 
-##  Testing y Calidad
+## Módulos de Cálculo
 
-| Documento | Descripción |
-|-----------|-------------|
-| [testing.md](testing.md) | Guía de pruebas del proyecto |
-| [benchmarks.md](benchmarks.md) | Benchmarks y métricas de rendimiento |
-| [estandares-codigo.md](estandares-codigo.md) | Estándares de código |
-| [errores-comunes.md](errores-comunes.md) | Errores comunes y soluciones |
+- [modulos/README.md](modulos/README.md)
 
----
+### Ingeniería Civil
 
-##  Contribución y Flujo de Trabajo
+- [modulos/civil.md](modulos/civil.md)
 
-| Documento | Descripción |
-|-----------|-------------|
-| [guia-contribuidor-primeros-pasos.md](guia-contribuidor-primeros-pasos.md) | Guía para nuevos contribuidores |
-| [flujo-de-trabajo.md](flujo-de-trabajo.md) | Flujo de trabajo con Git y ramas |
-| [estilo-commits.md](estilo-commits.md) | Convención de mensajes de commit |
-| [integracion-continua.md](integracion-continua.md) | Integración continua y CI/CD |
-| [como-agregar-modulo.md](como-agregar-modulo.md) | Cómo agregar un nuevo módulo |
+### Ingeniería Eléctrica
 
----
+- [modulos/electrica.md](modulos/electrica.md)
 
-##  Guías de Módulos
+### Matemáticas
 
-| Documento | Descripción |
-|-----------|-------------|
-| [guia-modulo-civil.md](guia-modulo-civil.md) | Guía del módulo de Ingeniería Civil |
-| [guia-modulo-electrica.md](guia-modulo-electrica.md) | Guía del módulo de Ingeniería Eléctrica |
+- [modulos/matematicas.md](modulos/matematicas.md)
 
----
+### Geometría
 
-##  Seguridad
+- [modulos/geometria.md](modulos/geometria.md)
 
-| Documento | Descripción |
-|-----------|-------------|
-| [seguridad.md](seguridad.md) | Consideraciones de seguridad |
+### Sistemas
+
+- [modulos/sistemas.md](modulos/sistemas.md)
+
+### Herramientas Especializadas
+
+- [modulos/herramienta-codigo-paridad.md](modulos/herramienta-codigo-paridad.md)
+- [modulos/herramienta-figuras-compuestas.md](modulos/herramienta-figuras-compuestas.md)
+- [modulos/herramienta-numeros-complejos.md](modulos/herramienta-numeros-complejos.md)
 
 ---
 
-##  Referencia
+## Herramientas y Funcionalidades
 
-| Documento | Descripción |
-|-----------|-------------|
-| [glosario.md](glosario.md) | Glosario de términos |
-| [glosario-tecnico.md](glosario-tecnico.md) | Glosario técnico |
-| [referencias.md](referencias.md) | Referencias y recursos externos |
-| [preguntas-frecuentes.md](preguntas-frecuentes.md) | Preguntas frecuentes |
-| [preguntas-al-administrador.md](preguntas-al-administrador.md) | Preguntas al administrador |
+- [herramientas.md](herramientas.md)
+- [registro-herramientas.md](registro-herramientas.md)
+- [comparacion-herramientas.md](comparacion-herramientas.md)
 
 ---
 
-##  Flujo de Usuario
+## Exportación y Empaquetado
 
-| Documento | Descripción |
-|-----------|-------------|
-| [flujo-usuario.md](flujo-usuario.md) | Flujo de usuario en el sistema |
-| [casos-de-uso.md](casos-de-uso.md) | Casos de uso del sistema |
-| [ejemplos.md](ejemplos.md) | Ejemplos de uso |
+- [preview-exportacion.md](preview-exportacion.md)
+- [empaquetado.md](empaquetado.md)
+- [pyinstaller-ejecutables.md](pyinstaller-ejecutables.md)
+
+---
+
+## Integraciones
+
+- [integracion-jupyter.md](integracion-jupyter.md)
+- [esquema-llm-tools.md](esquema-llm-tools.md)
+
+---
+
+## Producción y Operación
+
+- [despliegue.md](despliegue.md)
+- [checklist-produccion.md](checklist-produccion.md)
+- [versionado.md](versionado.md)
+- [modo-debug-trazas.md](modo-debug-trazas.md)
+
+---
+
+## Calidad y Testing
+
+- [testing.md](testing.md)
+- [benchmarks.md](benchmarks.md)
+- [estandares-codigo.md](estandares-codigo.md)
+- [errores-comunes.md](errores-comunes.md)
+
+---
+
+## Contribución
+
+- [guia-contribuidor-primeros-pasos.md](guia-contribuidor-primeros-pasos.md)
+- [flujo-de-trabajo.md](flujo-de-trabajo.md)
+- [estilo-commits.md](estilo-commits.md)
+- [integracion-continua.md](integracion-continua.md)
+- [como-agregar-modulo.md](como-agregar-modulo.md)
+
+---
+
+## Guías
+
+- [guia-modulo-civil.md](guia-modulo-civil.md)
+- [guia-modulo-electrica.md](guia-modulo-electrica.md)
+
+---
+
+## Seguridad
+
+- [seguridad.md](seguridad.md)
+
+---
+## Referencia
+
+- [api.md](api.md)
+- [glosario.md](glosario.md)
+- [glosario-tecnico.md](glosario-tecnico.md)
+- [referencias.md](referencias.md)
+- [preguntas-frecuentes.md](preguntas-frecuentes.md)
+- [preguntas-al-administrador.md](preguntas-al-administrador.md)
+
+---
+
+## Uso y Ejemplos
+
+- [flujo-usuario.md](flujo-usuario.md)
+- [casos-de-uso.md](casos-de-uso.md)
+- [ejemplos.md](ejemplos.md)
+- [estadisticas-uso.md](estadisticas-uso.md)
+
+---
+
+## Publicación y Distribución
+
+- [publicacion-pypi.md](publicacion-pypi.md)
+- [importar-parametros-batch.md](importar-parametros-batch.md)
+
+---
+
+## Historial
+
+- [changelog-v0.2.md](changelog-v0.2.md)
