@@ -4,12 +4,13 @@ Punto de entrada principal con subcomandos para las herramientas.
 """
 
 import argparse
-import sys
 import json
+import sys
+
 import argcomplete
 
 from escuadra.cli_interactivo import ejecutar_interactivo
-from escuadra.core.registry import descubrir_herramientas
+from escuadra.core.registry import descubrir_herramientas, herramientas_por_carrera
 
 
 def verificar_entorno():
@@ -19,6 +20,7 @@ def verificar_entorno():
 
     try:
         import importlib.util
+
         if importlib.util.find_spec("PySide6") is None:
             raise ImportError
     except ImportError:
@@ -55,9 +57,7 @@ def ejecutar_herramienta(args):
     """
     Ejecuta el subcomando correspondiente si el módulo existe.
     """
-
     herramienta = args.herramienta
-
     modulos_disponibles = obtener_modulos_disponibles()
 
     if herramienta not in modulos_disponibles:
@@ -69,13 +69,11 @@ def ejecutar_herramienta(args):
             f"escuadra.modulos.{herramienta}",
             fromlist=["ejecutar"]
         )
-
     except (ModuleNotFoundError, ImportError):
         herramienta_no_disponible(herramienta)
         return
 
     kwargs = vars(args).copy()
-
     kwargs.pop("herramienta")
     salida_json = kwargs.pop("json")
 
@@ -97,9 +95,34 @@ def ejecutar_herramienta(args):
         print(resultado)
 
 
+def cmd_listar(args):
+    """Muestra las herramientas disponibles agrupadas por carrera."""
+    agrupadas = herramientas_por_carrera()
+    filtro = args.carrera.lower() if args.carrera else None
+
+    encontradas = False
+
+    for carrera, herramientas in agrupadas.items():
+        if filtro and carrera.codigo != filtro:
+            continue
+
+        encontradas = True
+        print(f"\n{carrera.etiqueta}")
+        print("─" * len(carrera.etiqueta))
+
+        for h in herramientas:
+            print(f"  {h.nombre:<30} {h.descripcion}")
+
+    if not encontradas:
+        carreras_validas = ", ".join(c.codigo for c in agrupadas)
+        print(
+            f"No se encontraron herramientas para la carrera '{filtro}'.\n"
+            f"Carreras disponibles: {carreras_validas}"
+        )
+
+
 def main():
     """Punto de entrada principal del CLI de Escuadra."""
-
     try:
         verificar_entorno()
 
@@ -132,8 +155,23 @@ def main():
             help="Modo interactivo paso a paso (REPL)"
         )
 
-        herramientas = descubrir_herramientas()
+        # Subcomando: listar
+        agrupadas = herramientas_por_carrera()
+        codigos_carrera = ", ".join(c.codigo for c in agrupadas)
 
+        listar_parser = subparsers.add_parser(
+            "listar",
+            help="Lista todas las herramientas disponibles agrupadas por carrera"
+        )
+        listar_parser.add_argument(
+            "--carrera",
+            metavar="CARRERA",
+            help=f"Filtra por carrera. Valores posibles: {codigos_carrera}",
+            default=None
+        )
+        listar_parser.set_defaults(func=cmd_listar)
+
+        herramientas = descubrir_herramientas()
         for herramienta in herramientas:
             subparsers.add_parser(
                 herramienta.nombre,
@@ -141,7 +179,6 @@ def main():
             )
 
         argcomplete.autocomplete(parser)
-
         args = parser.parse_args()
 
         if args.herramienta is None:
@@ -150,6 +187,10 @@ def main():
 
         if args.herramienta == "interactivo":
             ejecutar_interactivo()
+            return
+
+        if hasattr(args, "func"):
+            args.func(args)
             return
 
         ejecutar_herramienta(args)
