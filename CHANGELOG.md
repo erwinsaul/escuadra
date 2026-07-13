@@ -5,6 +5,18 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es/1.1.0/)
 y este proyecto sigue el versionado [SemVer](https://semver.org/lang/es/).
 
+## Generación automática
+
+El archivo `CHANGELOG.md` puede generarse automáticamente a partir del historial de commits utilizando **git-cliff**, siguiendo la convención de Conventional Commits.
+
+Para generar o actualizar el changelog ejecute:
+
+```bash
+./scripts/generar-changelog.sh
+```
+
+El script genera las entradas del changelog a partir de los commits desde el último tag disponible.
+
 ## [Unreleased]
 
 ### Added
