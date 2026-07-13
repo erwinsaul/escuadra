@@ -268,3 +268,4 @@ class TestExportadorJSON:
             if os.path.exists(temp_path):
                 os.unlink(temp_path)
             os.rmdir(temp_dir)
+# Test comment
