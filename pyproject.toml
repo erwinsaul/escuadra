@@ -42,6 +42,10 @@ dev = [
     "pytest-qt",
     "ruff>=0.4",
     "pyinstaller>=6",
+    "flake8>=7.0",
+    # flake8 no soporta pyproject.toml de forma nativa; este plugin habilita
+    # la seccion [tool.flake8] de abajo. Ver https://github.com/john-hen/Flake8-pyproject
+    "Flake8-pyproject>=1.2",
 ]
 
 [project.scripts]
@@ -56,6 +60,26 @@ target-version = "py310"
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I"]
+
+[tool.flake8]
+# Requiere el plugin Flake8-pyproject (ver dependencias de dev) para que
+# flake8 lea esta seccion, ya que no la soporta de forma nativa.
+max-line-length = 88
+extend-ignore = [
+    # E203: espacio antes de ':' -- black formatea los slices asi
+    # (ej. "x[1 :]"), y E203 entra en conflicto directo con ese estilo.
+    "E203",
+    # W503: salto de linea antes de un operador binario -- black prefiere
+    # cortar antes del operador, lo opuesto a lo que pide W503 por defecto.
+    "W503",
+]
+exclude = [
+    ".git",
+    "__pycache__",
+    ".venv",
+    "build",
+    "dist",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
