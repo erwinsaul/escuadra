@@ -196,3 +196,49 @@
 
 ##### \- El procesamiento avanzado de texto no está implementado.
 
+
+# 5.6 Alcance educativo de fórmulas y procedimientos simplificados
+
+##### Descripción: Algunas herramientas implementadas en Escuadra tienen un propósito principalmente educativo y utilizan modelos simplificados. Los resultados obtenidos deben interpretarse como aproximaciones para aprendizaje, práctica académica o validaciones preliminares, y no sustituyen procedimientos profesionales, software especializado ni normativa técnica vigente.
+
+##### Simplificación de mapas de Karnaugh
+
+##### Limitaciones conocidas
+
+##### - La simplificación se realiza mediante agrupaciones típicas de mapas de Karnaugh.
+
+##### - No implementa necesariamente algoritmos completos de minimización como Quine-McCluskey ni métodos avanzados de optimización lógica.
+
+##### - Puede no ser adecuada para funciones de gran tamaño o para procesos de síntesis lógica industrial.
+
+##### Simplificaciones LRFD
+
+##### Limitaciones conocidas
+
+##### - Las combinaciones de carga utilizan expresiones simplificadas con fines educativos.
+
+##### - No reemplazan la aplicación directa de normas de diseño estructural vigentes.
+
+##### - No contemplan todas las combinaciones especiales, factores de ajuste o requisitos normativos específicos de cada jurisdicción.
+
+##### - Los resultados deben utilizarse únicamente como referencia conceptual o académica.
+
+##### Pandeo de Euler
+
+##### Limitaciones conocidas
+
+##### - El cálculo se basa en las hipótesis clásicas del modelo de Euler.
+
+##### - Es válido principalmente para columnas esbeltas sometidas a compresión axial.
+
+##### - Supone comportamiento elástico lineal del material.
+
+##### - No considera imperfecciones geométricas, excentricidades de carga, efectos inelásticos ni condiciones reales complejas de apoyo.
+
+##### - Su aplicación fuera de los rangos de validez física del modelo puede producir resultados no representativos.
+
+##### Uso académico de los resultados
+
+##### - Las herramientas que indiquen explícitamente el uso de aproximaciones o modelos idealizados deben considerarse de carácter educativo.
+
+##### - Los resultados no deben utilizarse como único criterio para decisiones de diseño, construcción, seguridad o certificación profesional.

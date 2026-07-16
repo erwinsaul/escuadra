@@ -1,32 +1,213 @@
-# Flujo de usuario
+---
 
-## 1. Perfil del usuario
+## 4. Diagramas de flujo de usuario
 
-Escuadra está dirigido a estudiantes, docentes y usuarios que necesitan utilizar herramientas matemáticas para resolver problemas de forma rápida y visual.
-
-El usuario busca:
-- Resolver operaciones matemáticas
-- Visualizar resultados de forma clara
-- Ahorrar tiempo en cálculos manuales
+Los siguientes diagramas muestran ejemplos de interacción entre el usuario y Escuadra para distintos tipos de cálculos. Cada flujo incluye un camino exitoso y un posible escenario de error.
 
 ---
 
-## 2. Flujo de uso principal
+## Flujo 1: Cálculo de área de una figura
 
-### Escenario: Resolver una operación matemática
+### Descripción
 
-1. El usuario abre la aplicación Escuadra.
-2. El sistema muestra la interfaz principal con las herramientas disponibles.
-3. El usuario selecciona una herramienta (por ejemplo: sistema de ecuaciones).
-4. El sistema muestra los campos de entrada necesarios.
-5. El usuario ingresa los datos requeridos.
-6. El usuario hace clic en el botón de "Calcular" o "Resolver".
-7. El sistema procesa la información.
-8. El sistema muestra el resultado en pantalla.
-9. El usuario revisa el resultado obtenido.
+Este flujo representa el proceso que sigue un usuario para calcular el área de una figura geométrica utilizando las herramientas del módulo de Geometría.
+
+### Diagrama de flujo
+
+```text
+        .-------.
+       ( INICIO )
+        '-------'
+            |
+            v
+   .-------------------.
+   | Seleccionar       |
+   | cálculo de área   |
+   '-------------------'
+            |
+            v
+   .-------------------.
+   | Ingresar          |
+   | dimensiones       |
+   '-------------------'
+            |
+            v
+   .-------------------.
+   | Validación        |
+   | de datos          |
+   '-------------------'
+            |
+            v
+      .------------.
+     / ¿Datos      /
+    /  válidos?   /
+   '------------'
+      |        |
+     Sí       No
+      |        |
+      v        v
+ .-----------.   .-------------------.
+ | Calcular  |   | Mostrar error     |
+ | área      |   | y solicitar       |
+ '-----------'   | corrección        |
+      |          '-------------------'
+      |                  |
+      |<-----------------'
+      |
+      v
+ .-----------.
+ | Mostrar   |
+ | resultado |
+ '-----------'
+      |
+      v
+   .-------.
+  (  FIN  )
+   '-------'
+```
+
+### Explicación de los pasos
+
+1. El usuario selecciona la herramienta para calcular áreas.
+2. Introduce las dimensiones requeridas por la figura.
+3. El sistema verifica que los datos sean válidos.
+4. Si los datos son correctos, se realiza el cálculo.
+5. El resultado se presenta en pantalla.
+6. Si existe un error, el sistema solicita corregir los datos antes de continuar.
 
 ---
 
-## 3. Resultado esperado
+## Flujo 2: Conversión de temperatura
 
-El usuario obtiene el resultado de la operación de forma rápida, clara y sin errores, facilitando su aprendizaje o trabajo.
+### Descripción
+
+Este flujo muestra el proceso utilizado para convertir temperaturas entre diferentes unidades soportadas por la aplicación.
+
+### Diagrama de flujo
+
+```text
+        .-------.
+       ( INICIO )
+        '-------'
+            |
+            v
+   .-------------------.
+   | Seleccionar       |
+   | conversor de      |
+   | temperatura       |
+   '-------------------'
+            |
+            v
+   .-------------------.
+   | Ingresar valor    |
+   | y unidades        |
+   '-------------------'
+            |
+            v
+      .------------.
+     / ¿Entrada    /
+    /  válida?    /
+   '------------'
+      |        |
+     Sí       No
+      |        |
+      v        v
+ .-----------.   .-------------------.
+ | Convertir |   | Mostrar error     |
+ | valor     |   | y pedir corrección|
+ '-----------'   '-------------------'
+      |                  |
+      |<-----------------'
+      |
+      v
+ .-----------.
+ | Mostrar   |
+ | resultado |
+ '-----------'
+      |
+      v
+   .-------.
+  (  FIN  )
+   '-------'
+```
+
+### Explicación de los pasos
+
+1. El usuario selecciona el conversor de temperatura.
+2. Introduce el valor que desea convertir.
+3. Selecciona la unidad de origen y la unidad de destino.
+4. El sistema valida la información ingresada.
+5. Si los datos son correctos, se ejecuta la conversión.
+6. El resultado convertido se muestra al usuario.
+7. En caso de error, el sistema solicita una nueva entrada.
+
+---
+
+## Flujo 3: Análisis de viga
+
+### Descripción
+
+Este flujo representa el uso de una herramienta del módulo Civil para analizar una viga y obtener resultados estructurales básicos.
+
+### Diagrama de flujo
+
+```text
+        .-------.
+       ( INICIO )
+        '-------'
+            |
+            v
+   .-------------------.
+   | Seleccionar       |
+   | análisis de viga  |
+   '-------------------'
+            |
+            v
+   .-------------------.
+   | Ingresar cargas   |
+   | y dimensiones     |
+   '-------------------'
+            |
+            v
+      .------------.
+     / ¿Datos      /
+    / correctos?  /
+   '------------'
+      |        |
+     Sí       No
+      |        |
+      v        v
+ .-----------.   .-------------------.
+ | Ejecutar  |   | Mostrar error     |
+ | cálculo   |   | y solicitar       |
+ '-----------'   | corrección        |
+      |          '-------------------'
+      |                  |
+      |<-----------------'
+      |
+      v
+ .-----------.
+ | Mostrar   |
+ | resultado |
+ '-----------'
+      |
+      v
+   .-------.
+  (  FIN  )
+   '-------'
+```
+
+### Explicación de los pasos
+
+1. El usuario selecciona una herramienta de análisis de vigas.
+2. Introduce las dimensiones, apoyos y cargas requeridas.
+3. El sistema valida que la información ingresada sea coherente.
+4. Se ejecutan los cálculos estructurales correspondientes.
+5. Los resultados se generan y se muestran en pantalla.
+6. Si los datos contienen errores, el sistema informa el problema y solicita correcciones.
+
+---
+
+## Conclusión
+
+Los flujos anteriores representan escenarios comunes de uso dentro de Escuadra. En todos los casos, el sistema sigue una secuencia similar: recepción de datos, validación, procesamiento y presentación de resultados. La validación previa ayuda a reducir errores y mejora la experiencia del usuario durante la realización de cálculos.
